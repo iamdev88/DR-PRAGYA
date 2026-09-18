@@ -623,19 +623,30 @@ ul, ol {
   display: none;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
   padding: 8px;
+  background: var(--color-ivory-warm);
+  border: 1px solid var(--color-ivory-border);
+  cursor: pointer;
+  z-index: 950;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-nav-toggle span {
   display: block;
   height: 2px;
-  width: 100%;
+  width: 22px;
   background-color: var(--color-primary-dark);
   transition: all var(--transition-fast);
+  border-radius: 2px;
+}
+
+.mobile-nav-toggle:active {
+  background: var(--color-ivory-muted);
 }
 
 /* Mobile Drawer Overlay */
@@ -2133,7 +2144,7 @@ ul, ol {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 890;
+  z-index: 990;
   background-color: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -2141,6 +2152,7 @@ ul, ol {
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
   height: var(--mobile-bar-height);
   padding: 8px 12px;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
 }
 
 .mobile-bar-inner {
@@ -2285,15 +2297,21 @@ ul, ol {
 
 @media (max-width: 860px) {
   .desktop-nav {
-    display: none;
+    display: none !important;
   }
 
   .header-actions .btn-primary {
-    display: none;
+    display: none !important;
+  }
+
+  .header-actions .header-call-btn {
+    display: none !important;
   }
 
   .mobile-nav-toggle {
-    display: flex;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   .trust-strip-grid {
@@ -2327,8 +2345,37 @@ ul, ol {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --header-height: 70px;
+    --mobile-bar-height: 64px;
+  }
+
   body {
-    padding-bottom: var(--mobile-bar-height);
+    padding-bottom: calc(var(--mobile-bar-height) + 12px);
+  }
+
+  /* Header & Logo Mobile Polish */
+  .header-container {
+    height: var(--header-height);
+  }
+
+  .brand-identity {
+    gap: 10px;
+  }
+
+  .brand-logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+    line-height: 1.1;
+  }
+
+  .brand-doctor-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
   }
 
   .mobile-sticky-bar {
@@ -2347,36 +2394,172 @@ ul, ol {
     display: none;
   }
 
-  .trust-strip-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+  /* Hero Section Mobile */
+  .hero-section {
+    padding-top: 24px;
+    padding-bottom: 40px;
   }
 
+  .hero-headline {
+    font-size: 2.1rem;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  .hero-subtext {
+    font-size: 0.96rem;
+    line-height: 1.55;
+    margin-bottom: 22px;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+  }
+
+  .hero-trust-bullets {
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-card-composition {
+    aspect-ratio: 4 / 4.4;
+    border-radius: var(--radius-md);
+  }
+
+  .hero-art-overlay-badge {
+    padding: 12px 14px;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .hero-badge-dr-name {
+    font-size: 1rem;
+  }
+
+  .hero-badge-dr-spec {
+    font-size: 0.72rem;
+  }
+
+  .hero-badge-location {
+    font-size: 0.7rem;
+  }
+
+  /* Trust Strip Mobile */
+  .trust-strip-section {
+    padding: 20px 0;
+  }
+
+  .trust-strip-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 10px;
+  }
+
+  .trust-metric-box {
+    padding: 0;
+  }
+
+  .trust-number {
+    font-size: 1.35rem;
+  }
+
+  .trust-label {
+    font-size: 0.72rem;
+  }
+
+  /* Sections Mobile Spacing */
+  .section-padding {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 1.85rem;
+  }
+
+  .section-lead {
+    font-size: 0.95rem;
+  }
+
+  .doctor-full-name {
+    font-size: 1.85rem;
+  }
+
+  /* Cards Grids Stacking */
   .cosmetic-pillars-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .why-grid, .journey-steps-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cosmetology-suite-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .about-features-columns {
     grid-template-columns: 1fr;
   }
 
+  .about-visual-box {
+    padding: 20px;
+  }
+
+  .about-card-quote {
+    font-size: 1.25rem;
+  }
+
+  .clinical-case-content {
+    padding: 24px 18px;
+  }
+
+  .clinical-case-title {
+    font-size: 1.45rem;
+  }
+
   .form-grid-2 {
     grid-template-columns: 1fr;
   }
 
+  .appointment-wrapper-box {
+    padding: 24px 16px;
+  }
+
+  .appointment-form-panel {
+    padding: 20px 16px;
+  }
+
   .footer-top-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
 
   .doctor-quote-bubble {
     position: static;
-    margin-top: 16px;
+    margin-top: 14px;
     max-width: 100%;
+  }
+
+  .map-container-frame {
+    min-height: 280px;
   }
 }
 
